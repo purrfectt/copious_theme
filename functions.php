@@ -134,4 +134,13 @@ register_post_type('creations', array(	'label' => 'Creations','description' => '
   'parent' => 'Parent Creation',
 ),) );
 
+/**
+ * Create Discipline & Role Taxonomies
+ */
+register_taxonomy('disciplines',array (
+  0 => 'creations',
+),array( 'hierarchical' => true, 'label' => 'Disciplines','show_ui' => true,'query_var' => true,'rewrite' => array('slug' => ''),'singular_label' => 'Discipline') );
+register_taxonomy('roles',array (
+  0 => 'creations',
+),array( 'hierarchical' => false, 'label' => 'Roles','show_ui' => true,'query_var' => true,'rewrite' => array('slug' => ''),'singular_label' => 'Role') );
 
