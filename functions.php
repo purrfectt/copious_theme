@@ -117,7 +117,7 @@ add_action( 'wp_enqueue_scripts', 'copious_scripts' );
 /**
  * Create Creation Post Type
  */
-register_post_type('creations', array(	'label' => 'Creations','description' => 'Things made throughout the years.','public' => true,'show_ui' => true,'show_in_menu' => true,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'exclude_from_search' => false,'menu_position' => 5,'menu_icon' => get_template_directory_uri() . '/images/creations-icon.png','supports' => array('title','editor','trackbacks','custom-fields','comments','revisions','thumbnail','author',),'taxonomies' => array('post_tag','disciplines',),'labels' => array (
+register_post_type('creations', array(	'label' => 'Creations','description' => 'Things made throughout the years.','public' => true,'show_ui' => true,'show_in_menu' => true,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'exclude_from_search' => false,'menu_position' => 5,'supports' => array('title','editor','trackbacks','custom-fields','comments','revisions','thumbnail','author',),'taxonomies' => array('post_tag','disciplines',),'labels' => array (
   'name' => 'Creations',
   'singular_name' => 'Creation',
   'menu_name' => 'Creations',
