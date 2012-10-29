@@ -134,6 +134,22 @@ register_post_type('creations', array(	'label' => 'Creations','description' => '
   'parent' => 'Parent Creation',
 ),) );
 
+// Define icon styles for the custom post type
+function creations_icons() {
+	?>
+<style type="text/css" media="screen">
+        #menu-posts-creations .wp-menu-image {
+            background: url(<?php bloginfo('template_url') ?>/images/creations-icon.png) no-repeat 6px -32px !important;
+        }
+        #menu-posts-creations:hover .wp-menu-image, #menu-posts-creations.wp-has-current-submenu .wp-menu-image {
+            background-position:6px 0px !important;
+        }
+        #icon-edit.icon32-posts-creations {background: url(<?php bloginfo('template_url') ?>/images/creations-icon-32x32.png) no-repeat;}
+    </style>
+
+<?php }
+add_action( 'admin_head', 'creations_icons' );
+
 /**
  * Create Discipline & Role Taxonomies
  */
