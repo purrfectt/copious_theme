@@ -269,6 +269,56 @@ if(function_exists("register_field_group"))
 		'menu_order' => 0,
 	));
 }
+
+/**
+ * Register field groups for Categories (our custom color bands)
+ */
+
+if(function_exists("register_field_group"))
+{
+	register_field_group(array (
+		'id' => '5095a0ebb97ca',
+		'title' => 'Post Category Fields',
+		'fields' => 
+		array (
+			0 => 
+			array (
+				'label' => 'Custom Color',
+				'name' => 'custom_color',
+				'type' => 'color_picker',
+				'instructions' => 'This is the Custom Color for the Blog bands under the primary content.',
+				'required' => '0',
+				'default_value' => '#eee',
+				'key' => 'field_5095a0e2b4e3c',
+				'order_no' => '0',
+			),
+		),
+		'location' => 
+		array (
+			'rules' => 
+			array (
+				0 => 
+				array (
+					'param' => 'ef_taxonomy',
+					'operator' => '==',
+					'value' => 'category',
+					'order_no' => '0',
+				),
+			),
+			'allorany' => 'all',
+		),
+		'options' => 
+		array (
+			'position' => 'normal',
+			'layout' => 'no_box',
+			'hide_on_screen' => 
+			array (
+			),
+		),
+		'menu_order' => 0,
+	));
+}
+
 /**
  * Hide ACF menu item from the admin menus
  */
