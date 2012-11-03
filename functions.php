@@ -161,51 +161,127 @@ register_taxonomy('roles',array (
 ),array( 'hierarchical' => false, 'label' => 'Roles','show_ui' => true,'query_var' => true,'rewrite' => array('slug' => ''),'singular_label' => 'Role') );
 
 /**
- * Create Custom Taxonomy Fields for Disciplines.
+ * Register field groups specific to Disciplines
  */
-function copious_taxonomy_add_new_meta_field() {
-	// this will add the custom meta field to the add new term page
-	?>
-	<div class="form-field">
-		<label for="term_meta[custom_term_meta]"><?php _e( 'Example meta field', 'copious' ); ?></label>
-		<input type="text" name="term_meta[custom_term_meta]" id="term_meta[custom_term_meta]" value="">
-		<p class="description"><?php _e( 'Enter a value for this field','copious' ); ?></p>
-	</div>
-<?php
-}
-add_action( 'disciplines_add_form_fields', 'copious_taxonomy_add_new_meta_field', 10, 2 );
 
-function copious_taxonomy_edit_meta_field($term) {
- 
-	// put the term ID into a variable
-	$t_id = $term->term_id;
- 
-	// retrieve the existing value(s) for this meta field. This returns an array
-	$term_meta = get_option( "taxonomy_$t_id" ); ?>
-	<tr class="form-field">
-	<th scope="row" valign="top"><label for="term_meta[custom_term_meta]"><?php _e( 'Example meta field', 'copious' ); ?></label></th>
-		<td>
-			<input type="text" name="term_meta[custom_term_meta]" id="term_meta[custom_term_meta]" value="<?php echo esc_attr( $term_meta['custom_term_meta'] ) ? esc_attr( $term_meta['custom_term_meta'] ) : ''; ?>">
-			<p class="description"><?php _e( 'Enter a value for this field','copious' ); ?></p>
-		</td>
-	</tr>
-<?php
+if(function_exists("register_field_group"))
+{
+	register_field_group(array (
+		'id' => '509583430ccc8',
+		'title' => 'Discipline Fields',
+		'fields' => 
+		array (
+			0 => 
+			array (
+				'label' => 'Discipline Icon',
+				'name' => 'discipline_icon',
+				'type' => 'image',
+				'instructions' => '90 x 90 px icon to represent this Discipline (will be scaled to 10 x 10 for menus)',
+				'required' => '0',
+				'save_format' => 'object',
+				'preview_size' => 'thumbnail',
+				'key' => 'field_50958337cc24e',
+				'order_no' => '0',
+			),
+			1 => 
+			array (
+				'label' => 'Short Name',
+				'name' => 'discipline_short_name',
+				'type' => 'text',
+				'instructions' => 'eg. Film',
+				'required' => '1',
+				'default_value' => '',
+				'formatting' => 'none',
+				'key' => 'field_50958337cc5c5',
+				'order_no' => '1',
+			),
+			2 => 
+			array (
+				'label' => 'Long Name',
+				'name' => 'discipline_long_name',
+				'type' => 'text',
+				'instructions' => 'eg. Film & Video',
+				'required' => '1',
+				'default_value' => '',
+				'formatting' => 'none',
+				'key' => 'field_50958337cc81a',
+				'order_no' => '2',
+			),
+			3 => 
+			array (
+				'label' => 'Short Description',
+				'name' => 'discipline_short_description',
+				'type' => 'text',
+				'instructions' => 'One sentence, no more than 72 characters.',
+				'required' => '1',
+				'default_value' => '',
+				'formatting' => 'html',
+				'key' => 'field_50958337cca42',
+				'order_no' => '3',
+			),
+			4 => 
+			array (
+				'label' => 'Long Description',
+				'name' => 'discipline_long_description',
+				'type' => 'textarea',
+				'instructions' => 'Not too much, maybe two sentences.',
+				'required' => '0',
+				'default_value' => '',
+				'formatting' => 'html',
+				'key' => 'field_50958337cccdc',
+				'order_no' => '4',
+			),
+			5 => 
+			array (
+				'label' => 'Recent Items Name',
+				'name' => 'discipline_recent_items_name',
+				'type' => 'text',
+				'instructions' => 'eg. “Clips” would display “Recent Clips”',
+				'required' => '0',
+				'default_value' => 'Items',
+				'formatting' => 'none',
+				'key' => 'field_50958337cd2c1',
+				'order_no' => '5',
+			),
+		),
+		'location' => 
+		array (
+			'rules' => 
+			array (
+				0 => 
+				array (
+					'param' => 'ef_taxonomy',
+					'operator' => '==',
+					'value' => 'disciplines',
+					'order_no' => '0',
+				),
+			),
+			'allorany' => 'all',
+		),
+		'options' => 
+		array (
+			'position' => 'normal',
+			'layout' => 'no_box',
+			'hide_on_screen' => 
+			array (
+			),
+		),
+		'menu_order' => 0,
+	));
 }
-add_action( 'disciplines_edit_form_fields', 'copious_taxonomy_edit_meta_field', 10, 2 );
-
-function save_taxonomy_custom_meta( $term_id ) {
-	if ( isset( $_POST['term_meta'] ) ) {
-		$t_id = $term_id;
-		$term_meta = get_option( "taxonomy_$t_id" );
-		$cat_keys = array_keys( $_POST['term_meta'] );
-		foreach ( $cat_keys as $key ) {
-			if ( isset ( $_POST['term_meta'][$key] ) ) {
-				$term_meta[$key] = $_POST['term_meta'][$key];
-			}
-		}
-		// Save the option array.
-		update_option( "taxonomy_$t_id", $term_meta );
+/**
+ * Hide ACF menu item from the admin menus
+ */
+ 
+function hide_admin_menu()
+{
+	global $current_user;
+	get_currentuserinfo();
+ 
+	if($current_user->user_login != 'evanpayne')
+	{
+		echo '<style type="text/css">#toplevel_page_edit-post_type-acf{display:none;}</style>';
 	}
-}  
-add_action( 'edited_disciplines', 'save_taxonomy_custom_meta', 10, 2 );  
-add_action( 'create_disciplines', 'save_taxonomy_custom_meta', 10, 2 );
+}
+ 
+add_action('admin_head', 'hide_admin_menu');
