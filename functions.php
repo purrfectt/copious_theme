@@ -67,9 +67,9 @@ function copious_setup() {
 	) );
 
 	/**
-	 * Add support for the Aside Post Formats
+	 * Add support for various Post Formats
 	 */
-	add_theme_support( 'post-formats', array( 'aside', ) );
+	add_theme_support( 'post-formats', array( 'gallery', 'link', 'image', 'video', 'audio' ) );
 
 	/**
 	 * Create Creation Post Type, Field Groups and Admin tweaks for displaying them.
@@ -108,7 +108,7 @@ function copious_scripts() {
 	wp_enqueue_style( 'style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'small-menu', get_template_directory_uri() . '/js/small-menu.js', array( 'jquery' ), '20120206', true );
-
+	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

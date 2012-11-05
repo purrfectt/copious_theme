@@ -15,6 +15,21 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
+
+		<?php if ( has_post_format( 'audio' )) {
+			$audio = get_field('creation_audio_file'); 
+			$audio_url = $audio['url'];
+			$audio_title = $audio['title'];
+			if (function_exists("insert_audio_player")) {  
+	  			insert_audio_player("[audio:$audio_url|width=400px|titles=$audio_title]");  
+			}
+		} 
+		?>
+
+		<?php if ( has_post_format( 'video' )) {
+			the_field('copious_video_content'); 
+		} 
+		?>
 		<?php the_content(); ?>
 		<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'copious' ), 'after' => '</div>' ) ); ?>
 	</div><!-- .entry-content -->
