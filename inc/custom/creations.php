@@ -97,6 +97,17 @@ if(function_exists("register_field_group"))
         'save_format' => 'object',
         'order_no' => '0',
       ),
+      1 => 
+      array (
+        'key' => 'field_5096a3d2b6faa',
+        'label' => 'Audio Embed Code',
+        'name' => 'creation_audio_embed',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => '0',
+        'save_format' => 'html',
+        'order_no' => '1',
+      ),
     ),
     'location' => 
     array (
